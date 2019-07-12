@@ -19,24 +19,6 @@ export function sortArray(data: Array<{}>, field: string, dir: "asc" | "desc"): 
   });
 }
 
-
-function isMatch() {
-  let fieldVal = filterFields[fieldName];
-  if (fieldVal == null || fieldVal == undefined) {
-    fieldVal = '';
-  }
-  const fieldSearchText = fieldVal.toString().toLowerCase();
-  const dataFieldValue = item[fieldName];
-  if (dataFieldValue == null) {
-    return false;
-  }
-  const currentIsMatched = dataFieldValue
-    .toString()
-    .toLowerCase()
-    .includes(fieldSearchText);
-  return previousMatched || currentIsMatched;
-}
-
 export function filterArray(
   data: Array<{}>,
   filterFields: { [field: string]: string }
@@ -56,6 +38,7 @@ export function filterArray(
         const fieldSearchText = fieldVal.toString().toLowerCase();
 
         return fieldName.split('|').reduce((previousMatched, subFieldName) => {
+          console.log("subFieldName", subFieldName, fieldSearchText)
           const dataFieldValue = item[subFieldName];
           if (dataFieldValue == null) {
             return false;
